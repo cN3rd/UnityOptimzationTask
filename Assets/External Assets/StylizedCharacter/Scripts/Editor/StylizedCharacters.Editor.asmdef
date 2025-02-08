@@ -1,0 +1,18 @@
+{
+    "name": "StylizedCharacters.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6ff3ac47921e4bf479c76b7c1e0b8354"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,19 @@
+{
+    "name": "WarFX.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9cede003e3065ab49a1bbeea324e1070",
+        "GUID:fad9c442ff0007b45a093b29924dad63"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

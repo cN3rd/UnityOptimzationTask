@@ -1,0 +1,16 @@
+{
+    "name": "WarFX.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9cede003e3065ab49a1bbeea324e1070"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
