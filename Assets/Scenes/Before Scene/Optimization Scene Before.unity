@@ -1622,6 +1622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2946589972397768415, guid: a6883c51f22a91441945fbd6682f0a5f,
         type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 2946589972397768415, guid: a6883c51f22a91441945fbd6682f0a5f,
+        type: 3}
       propertyPath: agentAnimator
       value: 
       objectReference: {fileID: 64808983}
