@@ -24,10 +24,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         hpText.text = bobby.Hp.ToString();
-    }
-
-    private void Update()
-    {
+        
         skillsHolder = GameObject.Find("Skills Group");
         GameObject[] skillsButtonUI = skillsHolder.GetComponentsInChildren<GameObject>();
         
