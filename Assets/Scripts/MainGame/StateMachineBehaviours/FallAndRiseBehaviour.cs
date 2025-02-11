@@ -21,10 +21,4 @@ public class FallAndRiseBehaviour : StateMachineBehaviour
         
         playerCharacterController.ToggleMoving(true);
     }
-
-    public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash, AnimatorControllerPlayable controller)
-    {
-        base.OnStateMachineEnter(animator, stateMachinePathHash, controller);
-      
-    }
 }
