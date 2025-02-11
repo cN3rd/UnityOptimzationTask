@@ -107,14 +107,4 @@ public class PlayerCharacterController : MonoBehaviour
         if (animator)
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
     }
-    
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
-    }
 }
