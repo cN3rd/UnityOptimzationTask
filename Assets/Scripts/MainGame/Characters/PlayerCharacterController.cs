@@ -12,15 +12,13 @@ public class PlayerCharacterController : MonoBehaviour
 {
     public event UnityAction<int> onTakeDamageEventAction;
     [SerializeField] private UnityEvent<int> onTakeDamageEvent;
-    
-    [Header("Navigation")] 
-    private NavMeshAgent navMeshAgent;
+    [SerializeField] Animator animator;
 
+    [Header("Navigation")] 
     [SerializeField] private Transform waypoint;
     [SerializeField] private Transform[] pathWaypoints;
+    [SerializeField] private NavMeshAgent navMeshAgent;
     
-    private Animator animator;
-
     public int Hp
     {
         get => hp;
