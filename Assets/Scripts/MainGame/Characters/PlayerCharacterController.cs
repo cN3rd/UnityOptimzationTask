@@ -109,7 +109,7 @@ public class PlayerCharacterController : MonoBehaviour
         
         if (Camera.main != null)
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
                 Debug.Log($"Hit: {hit.collider.name}");
