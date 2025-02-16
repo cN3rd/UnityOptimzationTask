@@ -112,6 +112,7 @@ public class PlayerCharacterController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 100f))
             {
+                //We want to know what the mouse is hovering now
                 Debug.Log($"Hit: {hit.collider.name}");
             }
         }
