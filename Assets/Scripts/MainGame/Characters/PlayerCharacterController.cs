@@ -12,13 +12,15 @@ public class PlayerCharacterController : MonoBehaviour
 {
     public event UnityAction<int> onTakeDamageEventAction;
     [SerializeField] private UnityEvent<int> onTakeDamageEvent;
-    [SerializeField] Animator animator;
 
     [Header("Navigation")] 
+    private NavMeshAgent navMeshAgent;
+
     [SerializeField] private Transform waypoint;
     [SerializeField] private Transform[] pathWaypoints;
-    [SerializeField] private NavMeshAgent navMeshAgent;
     
+    private Animator animator;
+
     public int Hp
     {
         get => hp;
@@ -104,5 +106,25 @@ public class PlayerCharacterController : MonoBehaviour
 
         if (animator)
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        
+        if (Camera.main != null)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+            {
+                Debug.Log($"Hit: {hit.collider.name}");
+            }
+        }
+
+    }
+    
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }
