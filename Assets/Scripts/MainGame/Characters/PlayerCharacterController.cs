@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -57,6 +58,25 @@ public class PlayerCharacterController : MonoBehaviour
         SetMudAreaCost();
         ToggleMoving(true);
         SetDestination(pathWaypoints[0]);
+
+        if (playerCamera)
+        {
+            StartCoroutine(TrackPlayerCamera());
+        }
+    }
+
+    IEnumerator TrackPlayerCamera()
+    {
+        var waitFor100MS = new WaitForSeconds(0.1f);
+        while (true)
+        {
+            //We want to know what the mouse is hovering now
+            var ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out var hit, 100f))
+                Debug.Log($"Hit: {hit.collider.name}");
+
+            yield return waitFor100MS;
+        }
     }
 
     void SetMudAreaCost()
@@ -83,13 +103,5 @@ public class PlayerCharacterController : MonoBehaviour
 
         if (animator)
             animator.SetFloat(SpeedPropertyID, navMeshAgent.velocity.magnitude);
-
-        if (playerCamera)
-        {
-            //We want to know what the mouse is hovering now
-            var ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out var hit, 100f))
-                Debug.Log($"Hit: {hit.collider.name}");
-        }
     }
 }
