@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Menu/Main Menu Scene.unity
     guid: 356878aca635b894fb453ef9b1c251c9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Baking Scene/Prefab Variants Scene/Prefab Variants Scene.unity
     guid: d243c29dfd062e943b5e38c5e180063f
+  - enabled: 1
+    path: Assets/Scenes/Before Scene/Optimization Scene Before.unity
+    guid: 75e24633f594ab2499efe0ea37aeacae
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 34080d2027876864eb546c52b7754d21,
       type: 2}
