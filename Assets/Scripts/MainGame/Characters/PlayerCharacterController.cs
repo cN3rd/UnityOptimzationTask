@@ -1,47 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerCharacterController : MonoBehaviour
 {
     static readonly int SpeedPropertyID = Animator.StringToHash("Speed");
+    [SerializeField] UnityEvent<int> onTakeDamageEvent;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Animator animator;
+
+    [Header("Navigation")]
+    [SerializeField] NavMeshAgent navMeshAgent;
+    [SerializeField] Transform waypoint;
+    [SerializeField] Transform[] pathWaypoints;
+
+    readonly bool hasBloodyBoots = true;
+    bool isMoving = true;
+    int startingHp;
+
+    public int Hp { get; set; }
+    public int CurrentWaypointIndex { get; set; }
+
     public event UnityAction<int> onTakeDamageEventAction;
-    [SerializeField] private UnityEvent<int> onTakeDamageEvent;
-    [SerializeField] private Camera playerCamera;
-
-    [Header("Navigation")] 
-    private NavMeshAgent navMeshAgent;
-
-    [SerializeField] private Transform waypoint;
-    [SerializeField] private Transform[] pathWaypoints;
-    
-    private Animator animator;
-
-    public int Hp
-    {
-        get => hp;
-        set => hp = value;
-    }
-
-    public int CurrentWaypointIndex
-    {
-        get => currentWaypointIndex;
-        set => currentWaypointIndex = value;
-    }
-
-    private bool isMoving = true;
-    private int currentWaypointIndex = 0;
-
-    private bool hasBloodyBoots = true;
-    
-    private int hp;
-    private int startingHp;
 
     public void ToggleMoving(bool shouldMove)
     {
@@ -62,59 +43,53 @@ public class PlayerCharacterController : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        hp -= damageAmount;
-        float hpPercentLeft = (float) hp / startingHp;
-        animator.SetLayerWeight(1, (1 - hpPercentLeft));
-        onTakeDamageEvent.Invoke(hp);
-        onTakeDamageEventAction?.Invoke(hp);
+        Hp -= damageAmount;
+        var hpPercentLeft = (float)Hp / startingHp;
+        animator.SetLayerWeight(1, 1 - hpPercentLeft);
+        onTakeDamageEvent.Invoke(Hp);
+        onTakeDamageEventAction?.Invoke(Hp);
     }
 
-    private void Start()
+    void Start()
     {
-        hp = 100;
-        animator = GetComponent<Animator>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        startingHp = hp;
+        Hp = 100;
+        startingHp = Hp;
         SetMudAreaCost();
         ToggleMoving(true);
         SetDestination(pathWaypoints[0]);
     }
 
-    private void SetMudAreaCost()
+    void SetMudAreaCost()
     {
-        if (hasBloodyBoots)
-        {
-            navMeshAgent.SetAreaCost(3, 1);
-        }
+        if (hasBloodyBoots) navMeshAgent.SetAreaCost(3, 1);
     }
 
     [ContextMenu("Take Damage Test")]
-    private void TakeDamageTesting()
+    void TakeDamageTesting()
     {
         TakeDamage(10);
     }
 
-
-    private void Update()
+    void Update()
     {
         if (isMoving && !navMeshAgent.isStopped && navMeshAgent.remainingDistance <= 0.1f)
         {
-            currentWaypointIndex++;
-            if (currentWaypointIndex >= pathWaypoints.Length)
-                currentWaypointIndex = 0;
-            SetDestination(pathWaypoints[currentWaypointIndex]);
+            CurrentWaypointIndex++;
+            if (CurrentWaypointIndex >= pathWaypoints.Length)
+                CurrentWaypointIndex = 0;
+
+            SetDestination(pathWaypoints[CurrentWaypointIndex]);
         }
 
         if (animator)
             animator.SetFloat(SpeedPropertyID, navMeshAgent.velocity.magnitude);
 
-        if (!playerCamera) return;
-
-        Ray ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        if (playerCamera)
         {
             //We want to know what the mouse is hovering now
-            Debug.Log($"Hit: {hit.collider.name}");
+            var ray = playerCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out var hit, 100f))
+                Debug.Log($"Hit: {hit.collider.name}");
         }
     }
 }
