@@ -12,6 +12,7 @@ public class PlayerCharacterController : MonoBehaviour
 {
     public event UnityAction<int> onTakeDamageEventAction;
     [SerializeField] private UnityEvent<int> onTakeDamageEvent;
+    [SerializeField] private Camera playerCamera;
 
     [Header("Navigation")] 
     private NavMeshAgent navMeshAgent;
@@ -37,8 +38,7 @@ public class PlayerCharacterController : MonoBehaviour
     private int currentWaypointIndex = 0;
 
     private bool hasBloodyBoots = true;
-
-
+    
     private int hp;
     private int startingHp;
 
@@ -106,15 +106,14 @@ public class PlayerCharacterController : MonoBehaviour
 
         if (animator)
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
-        
-        if (Camera.main != null)
+
+        if (!playerCamera) return;
+
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
-            {
-                //We want to know what the mouse is hovering now
-                Debug.Log($"Hit: {hit.collider.name}");
-            }
+            //We want to know what the mouse is hovering now
+            Debug.Log($"Hit: {hit.collider.name}");
         }
     }
 }
