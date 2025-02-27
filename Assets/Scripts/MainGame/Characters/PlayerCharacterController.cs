@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 
 public class PlayerCharacterController : MonoBehaviour
 {
+    static readonly int SpeedPropertyID = Animator.StringToHash("Speed");
     public event UnityAction<int> onTakeDamageEventAction;
     [SerializeField] private UnityEvent<int> onTakeDamageEvent;
     [SerializeField] private Camera playerCamera;
@@ -105,7 +106,7 @@ public class PlayerCharacterController : MonoBehaviour
         }
 
         if (animator)
-            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+            animator.SetFloat(SpeedPropertyID, navMeshAgent.velocity.magnitude);
 
         if (!playerCamera) return;
 
