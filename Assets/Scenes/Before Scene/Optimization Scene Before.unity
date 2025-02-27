@@ -23881,6 +23881,7 @@ MonoBehaviour:
   - {fileID: 1761746360}
   - {fileID: 1752325302}
   - {fileID: 1180221741}
+  skillDataGroup: {fileID: 11400000, guid: 7a7859898d524b047ab4bce7afa471b3, type: 2}
 --- !u!114 &2136455733
 MonoBehaviour:
   m_ObjectHideFlags: 0

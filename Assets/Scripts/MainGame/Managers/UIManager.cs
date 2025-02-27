@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerCharacterController bobby;
     [SerializeField] GameObject skillButtonGroup;
     [SerializeField] SkillButtonUI[] skillsButtonUI;
+    [SerializeField] SkillDataGroup skillDataGroup;
     
     public void RefreshHPText(int newHP)
     {
@@ -28,8 +29,8 @@ public class UIManager : MonoBehaviour
         
         for (int i = 0; i < skillsButtonUI.Length; i++)
         {
-            skillsButtonUI[i].skillIcon.sprite = skillsButtonUI[i].skillIcons[i];
-            skillsButtonUI[i].skillNameText.text = "Skill " + (i + 1);
+            skillsButtonUI[i].skillIcon.sprite = skillDataGroup.skills[i].icon;
+            skillsButtonUI[i].skillNameText.text = skillDataGroup.skills[i].name;
         }
     }
 }
