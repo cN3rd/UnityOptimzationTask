@@ -116,16 +116,5 @@ public class PlayerCharacterController : MonoBehaviour
                 Debug.Log($"Hit: {hit.collider.name}");
             }
         }
-
-    }
-    
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
     }
 }
